@@ -18,4 +18,4 @@ Currently, two official plugins are available
 <!-- Problem 1 Solved -->
 <!-- Problem 2 Require PAN card for integration of rozarpay -->
 
-<!-- Deployment Left -->
+<!-- Deployment -->
