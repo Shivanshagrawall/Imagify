@@ -74,7 +74,7 @@ const userCredits = async (req, res) => {
 
 const razorpayInstance = new razorpay({
   key_id: process.env.RAZORPAY_KEY_ID,
-  key_secret: process.env.RAZORPAY_KEY_SECRECT,
+  key_secret: process.env.RAZORPAY_KEY_SECRET,
 });
 
 const paymentRazorpay = async (req, res) => {
@@ -86,7 +86,8 @@ const paymentRazorpay = async (req, res) => {
       return res.json({ success: false, message: "Missing Details" });
     }
 
-    let credits, plan, amount, date;
+    let credits, plan, date;
+    let amount=1;
 
     switch (planId) {
       case "Basic":
@@ -121,22 +122,27 @@ const paymentRazorpay = async (req, res) => {
       credits,
       date,
     };
-
     const newTransaction = await transactionModel.create(transactionData);
-
     const options = {
       amount: amount * 100,
       currency: process.env.CURRENCY,
-      receipt: newTransaction._id,
+      receipt: newTransaction._id.toString(),
     };
-
-    await razorpayInstance.orders.create(options, (error, order) => {
-      if (error) {
-        console.log(error);
-        return res.json({ success: false, message: error });
-      }
+    // await razorpayInstance.orders.create(options, (error, order) => {
+    //   if (error) {
+    //     console.log(error);
+    //     return res.json({ success: false, message: error });
+    //   }
+    //   res.json({ success: true, order });
+    // });
+    try {
+      const order = await razorpayInstance.orders.create(options);
+      
       res.json({ success: true, order });
-    });
+    } catch (error) {
+      console.error("Razorpay order creation failed", error);
+      return res.json({ success: false, message: error.message });
+    }
   } catch (error) {
     console.log(error);
     res.json({ success: false, message: error.message });
