@@ -1,5 +1,6 @@
 import mongoose from "mongoose";
 
+// Defining Transaction Model
 const transactionSchema = new mongoose.Schema({
     userId:{type:String,required:true},
     plan:{type:String,required:true},

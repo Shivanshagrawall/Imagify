@@ -4,7 +4,8 @@ import { assets } from '../assets/assets'
 const Footer = () => {
   return (
     <div className='flex items-center justify-between gap-4 py-3 mt-20 '>
-        <img src={assets.logo} alt="Logo" width={150}/>
+        {/* <img src={assets.logo} alt="Logo" width={150}/> */}
+        <h2 className="text-3xl lg:text-4xl italic text-[#2563EB]">CrafttAI</h2>
         <p className='flex-1 border-l border-gray-400 pl-4 text-sm text-gray-500 max-sm:hidden'>&copy;Copyright Shivansh Agrawal | All right reserved.</p>
 
         <div className='flex gap-2.5'>

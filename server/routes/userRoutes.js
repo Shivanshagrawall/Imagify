@@ -4,6 +4,7 @@ import userAuth from '../middleware/auth.js';
 
 const userRouter=express.Router();
 
+// Calling routes for user
 userRouter.post('/register',registerUser);
 userRouter.post('/login',loginUser);
 userRouter.get('/credits',userAuth,userCredits);

@@ -2,6 +2,7 @@ import axios from "axios";
 import FormData from "form-data";
 import userModel from "../models/userModel.js";
 
+// Function to Generate Image 
 export const generateImage= async(req,res)=>{
     try {
         
@@ -38,9 +39,6 @@ export const generateImage= async(req,res)=>{
         res.json({success:true, message:"Image Generated", creditBalance:user.creditBalance-1,resultImage})
 
     } catch (error) {
-        // console.log(error);
-        // console.log("Error Details:", error.response ? error.response.data : error.message);
-        // res.json({success:false, message:error.message});
         if (error.response && error.response.data) {
             const errorMessage = Buffer.from(error.response.data).toString("utf-8");
             console.log("Error Details:", errorMessage);
@@ -48,6 +46,5 @@ export const generateImage= async(req,res)=>{
             console.log("Error Message:", error.message);
         }
         res.json({ success: false, message: error.message });
-        console.log("ClipDrop API Key:", process.env.CLIPDROP_API);
     }
 }

@@ -1,5 +1,6 @@
 import jwt from 'jsonwebtoken';
 
+// Auth middleware for secuity 
 const userAuth=async(req,res,next)=>{
     const {token}=req.headers;
 

@@ -3,6 +3,8 @@ import { generateImage } from '../controller/imageController.js';
 import userAuth from '../middleware/auth.js';
 
 const imageRouter=express.Router();
+
+// Calling image routes
 imageRouter.post('/generate-image',userAuth,generateImage);
 
 export default imageRouter;

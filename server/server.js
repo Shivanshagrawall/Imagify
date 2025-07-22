@@ -2,6 +2,7 @@ import express from 'express';
 import cors from 'cors';
 import 'dotenv/config';
 
+// Importing Routes
 import connectDB from './config/mongodb.js';
 import userRouter from './routes/userRoutes.js';
 import imageRouter from './routes/imageRoutes.js';
@@ -13,6 +14,7 @@ app.use(express.json());
 app.use(cors());
 await connectDB();  
 
+// API Call
 app.use('/api/user',userRouter);
 app.use('/api/image',imageRouter);
 app.get('/',(req,res)=>{res.send("API Working fine")});

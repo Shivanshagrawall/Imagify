@@ -4,6 +4,7 @@ import jwt from "jsonwebtoken";
 import razorpay from "razorpay";
 import transactionModel from "../models/transactionModel.js";
 
+// Function to register new user
 const registerUser = async (req, res) => {
   try {
     const { name, email, password } = req.body;
@@ -32,6 +33,7 @@ const registerUser = async (req, res) => {
   }
 };
 
+// Function to login user
 const loginUser = async (req, res) => {
   try {
     const { email, password } = req.body;
@@ -56,6 +58,7 @@ const loginUser = async (req, res) => {
   }
 };
 
+// Function to manage user credits
 const userCredits = async (req, res) => {
   try {
     const { userId } = req.body;
@@ -77,6 +80,7 @@ const razorpayInstance = new razorpay({
   key_secret: process.env.RAZORPAY_KEY_SECRET,
 });
 
+// Function for rozarpay payment
 const paymentRazorpay = async (req, res) => {
   try {
     const { userId, planId } = req.body;
@@ -128,13 +132,6 @@ const paymentRazorpay = async (req, res) => {
       currency: process.env.CURRENCY,
       receipt: newTransaction._id.toString(),
     };
-    // await razorpayInstance.orders.create(options, (error, order) => {
-    //   if (error) {
-    //     console.log(error);
-    //     return res.json({ success: false, message: error });
-    //   }
-    //   res.json({ success: true, order });
-    // });
     try {
       const order = await razorpayInstance.orders.create(options);
       
@@ -149,6 +146,7 @@ const paymentRazorpay = async (req, res) => {
   }
 };
 
+// Function to verify Rozarpay Payment
 const verifyRazorpay = async (req, res) => {
   try {
     const { razorpay_order_id } = req.body;
